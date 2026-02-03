@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>GlucoPredict AI</title>
+</head>
+<body>
+
+<h2>Evaluación de Riesgo de Diabetes Tipo 2</h2>
+
+<form id="riskForm">
+    <label>Edad:</label><br>
+    <input type="number" id="age" required><br><br>
+
+    <label>IMC:</label><br>
+    <input type="number" id="bmi" step="0.1" required><br><br>
+
+    <label>Glucosa (mg/dL):</label><br>
+    <input type="number" id="glucose" required><br><br>
+
+    <label>Presión arterial:</label><br>
+    <input type="number" id="bp" required><br><br>
+
+    <label>
+        <input type="checkbox" id="family">
+        Antecedentes familiares
+    </label><br><br>
+
+    <button type="submit">Evaluar riesgo</button>
+</form>
+
+<h3 id="result"></h3>
+
+<script>
+document.getElementById("riskForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const data = {
+        age: parseInt(document.getElementById("age").value),
+        bmi: parseFloat(document.getElementById("bmi").value),
+        glucose: parseInt(document.getElementById("glucose").value),
+        blood_pressure: parseInt(document.getElementById("bp").value),
+        family_history: document.getElementById("family").checked
+    };
+
+    const response = await fetch("http://127.0.0.1:5000/predict", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+    document.getElementById("result").innerText =
+        `Riesgo estimado: ${result.risk_percentage}%`;
+});
+</script>
+
+</body>
+</html>
