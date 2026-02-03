@@ -1,0 +1,2 @@
+# GlucoPredict-AI
+En desarrollo
