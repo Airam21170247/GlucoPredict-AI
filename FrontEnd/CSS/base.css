@@ -1,0 +1,118 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap");
+
+:root {
+  --bg: #f4f7fb;
+  --card: #ffffff;
+  --primary: #4d8dc6;
+  --primary-soft: #d9e7f5;
+  --accent: #5ac8b0;
+
+  --text: #1f2a44;
+  --muted: #5a6b8a;
+
+  --border: #e3e8f0;
+  --radius: 16px;
+  --shadow: 0 18px 44px rgba(37, 64, 112, 0.16);
+  --ring: 0 0 0 4px rgba(77, 141, 198, 0.18);
+}
+
+* { box-sizing: border-box; }
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:"Manrope", system-ui, sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(900px 520px at 10% 10%, rgba(77,141,198,.14), transparent 60%),
+    radial-gradient(900px 520px at 90% 20%, rgba(90,200,176,.12), transparent 60%),
+    linear-gradient(180deg, #fbfdff, var(--bg));
+}
+
+a{
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+a:hover{ text-decoration: underline; }
+
+button{
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 0;
+  font-family: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--primary), #5fa2d6);
+  color:#fff;
+  box-shadow: 0 16px 30px rgba(77,141,198,.26);
+  transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+}
+button:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(77,141,198,.35);
+  filter: brightness(1.03);
+}
+button:active{ transform: translateY(0); }
+
+.btn-ghost{
+  background: var(--primary-soft);
+  color: var(--primary);
+  box-shadow: none;
+  border: 1px solid rgba(185,211,238,.9);
+}
+.btn-ghost:hover{ filter:none; }
+
+input, select{
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: #fff;
+  font-family: inherit;
+  color: var(--text);
+}
+input:focus, select:focus{
+  outline: none;
+  border-color: rgba(77,141,198,.55);
+  box-shadow: var(--ring);
+}
+
+/* Lista bonita sin afectar links normales */
+ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+li{
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+li:last-child{ border-bottom: 0; }
+
+/* Pill solo para links dentro de lista */
+li a{
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  text-decoration: none;
+  transition: transform .15s ease, background .15s ease;
+}
+li a:hover{
+  background: #c6dbf3;
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+.card{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.muted{ color: var(--muted); }
+.center{ text-align:center; }
