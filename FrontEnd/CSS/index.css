@@ -14,6 +14,11 @@ h1{
   color: var(--primary);
 }
 
+h2{
+  margin:0;
+  color: var(--primary);
+}
+
 p{
   margin: 0;
   color: var(--muted);
@@ -34,4 +39,34 @@ a{
 a:hover{
   text-decoration:none;
   transform: translateY(-1px);
+}
+
+
+
+form{
+  width: min(520px, 100%);
+  padding: 18px 20px;
+}
+
+form br, br { display:none; }
+
+input{
+  margin-bottom: 10px;
+}
+
+hr{
+  width: min(520px, 100%);
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+button{
+  width: min(520px, 100%);
+}
+
+#googleLogin{
+  background: var(--primary-soft);
+  color: var(--primary);
+  box-shadow: none;
+  border: 1px solid rgba(185,211,238,.9);
 }

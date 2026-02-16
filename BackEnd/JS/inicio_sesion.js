@@ -29,9 +29,3 @@ import { firebaseConfig } from "./configurationFirebase.js";
     // Redirigir a rol.html
     window.location.href = "rol.html";
   });
-
-  document.getElementById("appleLogin").addEventListener("click", () => {
-    alert("Funcionalidad de inicio con Apple no implementada aún.");
-    // Redirigir a rol.html
-    window.location.href = "rol.html";
-  });

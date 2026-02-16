@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Historial Clínico</title>
+</head>
+<body>
+
+<h2>Historial Clínico del Paciente</h2>
+
+<p>
+    Ingrese la información clínica del paciente o cargue un archivo PDF.
+    Los datos deben ser verificados antes de su análisis.
+</p>
+
+<hr>
+
+<h3>Subir historial clínico (PDF)</h3>
+<input type="file" id="pdfFile" accept="application/pdf">
+<p id="pdfStatus"></p>
+
+<hr>
+
+<h3>Información personal</h3>
+
+<form id="historialForm">
+
+<label>Nombre completo:</label><br>
+<input type="text" id="name" required><br><br>
+
+<label>Edad:</label><br>
+<input type="number" id="age" required><br><br>
+
+<label>Sexo:</label><br>
+<select id="sex">
+    <option value="M">Masculino</option>
+    <option value="F">Femenino</option>
+</select><br><br>
+
+<hr>
+
+<h3>Antecedentes</h3>
+
+<label>
+    <input type="checkbox" id="family">
+    Antecedentes familiares de diabetes
+</label><br><br>
+
+<label>
+    <input type="checkbox" id="hypertension">
+    Diagnóstico previo de hipertensión
+</label><br><br>
+
+<hr>
+
+<h3>Hábitos</h3>
+
+<label>Actividad física:</label><br>
+<select id="activity">
+    <option value="sedentario">Sedentario</option>
+    <option value="moderado">Moderado</option>
+    <option value="activo">Activo</option>
+</select><br><br>
+
+<label>Consumo de alcohol:</label><br>
+<select id="alcohol">
+    <option value="no">No consume</option>
+    <option value="ocasional">Ocasional</option>
+    <option value="frecuente">Frecuente</option>
+</select><br><br>
+
+<hr>
+
+<h3>Datos clínicos</h3>
+
+<label>Índice de Masa Corporal (IMC):</label><br>
+<input type="number" id="bmi" step="0.1" required><br><br>
+
+<label>Glucosa en ayunas (mg/dL):</label><br>
+<input type="number" id="glucose" required><br><br>
+
+<label>Presión arterial sistólica (mmHg):</label><br>
+<input type="number" id="bp" required><br><br>
+
+<br>
+
+<button type="submit">Guardar historial clínico</button>
+<br><br>
+<button type="button" onclick="window.location.href='paciente.html'">
+    Volver a la predicción del paciente
+</button>
+
+</form>
+
+<p id="saveStatus"></p>
+
+<script type="module" src="../../BackEnd/JS/historial_clinico.js"></script>
+
+</body>
+</html>
