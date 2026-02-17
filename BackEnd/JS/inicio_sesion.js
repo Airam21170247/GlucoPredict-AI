@@ -13,7 +13,7 @@ import { firebaseConfig } from "./configurationFirebase.js";
       console.log("Usuario:", result.user);
       alert("Bienvenido con Google: " + result.user.email);
       // Redirigir a rol.html
-      window.location.href = "rol.html";
+      window.location.href = "../../FrontEnd/HTML/rol.html";
     } catch (error) {
       console.error("Error en login:", error);
       alert("Error: " + error.message);
@@ -27,5 +27,5 @@ import { firebaseConfig } from "./configurationFirebase.js";
     // Aquí puedes agregar la lógica para autenticar con correo y contraseña
     alert("Correo: " + email + "\nContraseña: " + password);
     // Redirigir a rol.html
-    window.location.href = "rol.html";
+    window.location.href = "../../FrontEnd/HTML/rol.html";
   });
