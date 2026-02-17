@@ -1,4 +1,4 @@
-body{
+﻿body{
   min-height: 100vh;
   display:flex;
   flex-direction:column;
@@ -69,4 +69,29 @@ button{
   color: var(--primary);
   box-shadow: none;
   border: 1px solid rgba(185,211,238,.9);
+}
+
+.logo{
+  width: clamp(84px, 24vw, 140px);
+  height: auto;
+}
+
+@media (max-width: 600px){
+  body{
+    padding: 24px 12px;
+    gap: 12px;
+  }
+
+  h1{
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  p{
+    font-size: 0.95rem;
+  }
+
+  form{
+    padding: 16px;
+  }
 }

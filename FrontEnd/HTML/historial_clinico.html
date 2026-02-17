@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
+<link rel="stylesheet" href="/FrontEnd/CSS/historial_clinico.css">
+<link rel="stylesheet" href="/FrontEnd/CSS/base.css">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historial Clínico</title>
 </head>
 <body>
+<img src="/FrontEnd/img/logo.png" alt="Logo" class="corner-logo">
 
 <h2>Historial Clínico del Paciente</h2>
 
@@ -14,7 +18,7 @@
 </p>
 
 <hr>
-
+ 
 <h3>Subir historial clínico (PDF)</h3>
 <input type="file" id="pdfFile" accept="application/pdf">
 <p id="pdfStatus"></p>
@@ -73,7 +77,7 @@
 
 <h3>Datos clínicos</h3>
 
-<label>Índice de Masa Corporal (IMC):</label><br>
+<label>Indice de Masa Corporal (IMC):</label><br>
 <input type="number" id="bmi" step="0.1" required><br><br>
 
 <label>Glucosa en ayunas (mg/dL):</label><br>
