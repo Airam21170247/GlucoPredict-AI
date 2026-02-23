@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historial Clínico</title>
-    <link rel="stylesheet" href="/FrontEnd/CSS/historial_clinico.css">
-    <link rel="stylesheet" href="/FrontEnd/CSS/base.css">
+    <link rel="stylesheet" href="/GlucoPredict-AI/FrontEnd/CSS/historial_clinico.css">
+    <link rel="stylesheet" href="/GlucoPredict-AI/FrontEnd/CSS/base.css">
 </head>
 <body>
     
-<img src="/FrontEnd/IMG/logo.png" alt="Logo" class="corner-logo">
+<img src="/GlucoPredict-AI/FrontEnd/IMG/logo.png" alt="Logo" class="corner-logo">
 
-<h2>Historial Clínico del Paciente</h2>
+<h2>Historial Clínico</h2>
 
 <p>
     Ingrese la información clínica del paciente o cargue un archivo PDF.
@@ -92,17 +92,17 @@
 
 <button type="submit">Guardar historial clínico</button>
 <br><br>
-<button type="button" onclick="window.location.href='paciente.html'">
-    Volver a la predicción del paciente
+<button type="button" id="btnVolver">
+    Volver a la predicción
 </button>
 
 </form>
 
 <p id="saveStatus"></p>
 
-<script type="module" src="../../BackEnd/JS/historial_clinico.js"></script>
+<script type="module" src="/GlucoPredict-AI/BackEnd/JS/historial_clinico.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script type="module" src="../../BackEnd/JS/auth-guard.js"></script>
+<script type="module" src="/GlucoPredict-AI/BackEnd/JS/auth-guard.js"></script>
 
 </body>
 </html>

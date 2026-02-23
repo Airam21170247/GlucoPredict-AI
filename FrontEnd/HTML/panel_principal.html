@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Principal - GlucoPredict-AI</title>
+
+    <link rel="stylesheet" href="/GlucoPredict-AI/FrontEnd/CSS/base.css">
+    <link rel="stylesheet" href="/GlucoPredict-AI/FrontEnd/CSS/panel_principal.css">
+</head>
+
+<body>
+<img src="/GlucoPredict-AI/FrontEnd/IMG/logo.png" alt="Logo" class="corner-logo">
+
+<h1>Panel Principal</h1>
+<p>Seleccione el área que desea administrar</p>
+
+<div class="panel-container">
+
+    <!-- Sección Clínicas -->
+    <div class="panel-card">
+        <h2>🏥 Clínicas</h2>
+        <p>
+            Administre clínicas, pacientes y análisis clínicos.
+            Ideal para médicos y profesionales de la salud.
+        </p>
+        <button id="btnClinicas">Entrar a Clínicas</button>
+    </div>
+
+    <!-- Sección Perfiles -->
+    <div class="panel-card">
+        <h2>👤 Perfiles Personales</h2>
+        <p>
+            Gestione perfiles personales y realice evaluaciones
+            de riesgo de Diabetes Tipo 2.
+        </p>
+        <button id="btnPerfiles">Entrar a Perfiles</button>
+    </div>
+
+</div>
+
+<hr>
+
+<button id="logoutBtn" class="logout-btn">Cerrar sesión</button>
+
+<script type="module" src="/GlucoPredict-AI/BackEnd/JS/panel_principal.js"></script>
+<script type="module" src="/GlucoPredict-AI/BackEnd/JS/auth-guard.js"></script>
+
+</body>
+</html>

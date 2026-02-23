@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { firebaseConfig } from "./configurationFirebase.js";
-
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
@@ -11,21 +11,24 @@ import { firebaseConfig } from "./configurationFirebase.js";
     try {
       const result = await signInWithPopup(auth, provider);
       console.log("Usuario:", result.user);
-      alert("Bienvenido con Google: " + result.user.email);
-      // Redirigir a rol.html
-      window.location.href = "../../FrontEnd/HTML/rol.html";
+      // Redirigir al panel principal
+      window.location.href = "FrontEnd/HTML/panel_principal.html";
     } catch (error) {
       console.error("Error en login:", error);
       alert("Error: " + error.message);
     }
   });
 
-  document.getElementById("loginForm").addEventListener("submit", (e) => {
+  document.getElementById("loginForm").addEventListener("submit", async e => {
     e.preventDefault();
+
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-    // Aquí puedes agregar la lógica para autenticar con correo y contraseña
-    alert("Correo: " + email + "\nContraseña: " + password);
-    // Redirigir a rol.html
-    window.location.href = "../../FrontEnd/HTML/rol.html";
-  });
+
+    try {
+        await signInWithEmailAndPassword(auth, email, password);
+        window.location.href = "/FrontEnd/HTML/panel_principal.html";
+    } catch (err) {
+        alert("Credenciales incorrectas");
+    }
+});

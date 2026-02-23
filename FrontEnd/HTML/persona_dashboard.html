@@ -5,28 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Personal</title>
-    <link rel="stylesheet" href="/FrontEnd/CSS/persona_dashboard.css">
-    <link rel="stylesheet" href="/FrontEnd/CSS/base.css">
+    <link rel="stylesheet" href="/GlucoPredict-AI/FrontEnd/CSS/persona_dashboard.css">
+    <link rel="stylesheet" href="/GlucoPredict-AI/FrontEnd/CSS/base.css">
 </head>
 <body>
-<img src="/FrontEnd/IMG/logo.png" alt="Logo" class="corner-logo">
+
+<img src="/GlucoPredict-AI/FrontEnd/IMG/logo.png" alt="Logo" class="corner-logo">
 
 <h2>Perfiles registrados</h2>
 
-<ul>
-    <li>
-        Mi perfil
-        <a href="perfil_persona.html">Ver</a>
-    </li>
+<ul id="listaPerfiles">
+    <!-- Perfiles se insertan aquí -->
 </ul>
 
-<button>Agregar persona</button>
+<button onclick="window.location.href='agregar_perfil.html'">Agregar perfil</button>
 
 <br><br>
-<button onclick="window.location.href='../../index.html'">Volver al inicio</button>
+<button onclick="window.location.href='panel_principal.html'">
+    Volver al Panel Principal
+</button>
 
-<script type="module" src="../../BackEnd/JS/auth-guard.js"></script>
+<script type="module" src="/GlucoPredict-AI/BackEnd/JS/persona_dashboard.js"></script>
+<script type="module" src="/GlucoPredict-AI/BackEnd/JS/auth-guard.js"></script>
 
 </body>
 </html>
-

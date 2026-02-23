@@ -1,39 +1,31 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clínica</title>
-    <link rel="stylesheet" href="/FrontEnd/CSS/clinica.css">
-    <link rel="stylesheet" href="/FrontEnd/CSS/base.css">
+    <link rel="stylesheet" href="/GlucoPredict-AI/FrontEnd/CSS/clinica.css">
+    <link rel="stylesheet" href="/GlucoPredict-AI/FrontEnd/CSS/base.css">
 </head>
 <body>
-<img src="/FrontEnd/IMG/logo.png" alt="Logo" class="corner-logo">
 
-<h2>Clínica: Clínica Central</h2>
-<p>Dirección: Calle Ejemplo 123</p>
+<img src="/GlucoPredict-AI/FrontEnd/IMG/logo.png" class="corner-logo">
+
+<h2 id="nombreClinica">Clínica</h2>
+<p id="direccionClinica"></p>
 
 <h3>Pacientes</h3>
+<ul id="listaPacientes"></ul>
 
-<ul>
-    <li>
-        Juan Pérez
-        <a href="paciente.html">Ver perfil</a>
-    </li>
-    <li>
-        María López
-        <a href="paciente.html">Ver perfil</a>
-    </li>
-</ul>
-
-<button>Agregar paciente</button>
+<button id="btnAgregarPaciente">Agregar paciente</button>
 
 <br><br>
-<button onclick="window.location.href='medico_dashboard.html'">Volver a las clínicas</button>
+<button onclick="window.location.href='medico_dashboard.html'">
+    Volver a las clínicas
+</button>
 
-<script type="module" src="../../BackEnd/JS/auth-guard.js"></script>
+<script type="module" src="/GlucoPredict-AI/BackEnd/JS/clinica.js"></script>
+<script type="module" src="/GlucoPredict-AI/BackEnd/JS/auth-guard.js"></script>
 
 </body>
 </html>
-

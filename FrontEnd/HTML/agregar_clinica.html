@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Clínica</title>
+    <link rel="stylesheet" href="/GlucoPredict-AI/FrontEnd/CSS/base.css">
+</head>
+<body>
+
+<h2>Agregar nueva clínica</h2>
+
+<form id="formClinica">
+    <input type="text" id="nombreClinica" placeholder="Nombre de la clínica" required><br><br>
+    <input type="text" id="direccionClinica" placeholder="Dirección" required><br><br>
+    <button type="submit">Guardar clínica</button>
+</form>
+
+<br>
+<button onclick="window.location.href='medico_dashboard.html'">Volver</button>
+
+<script type="module" src="/GlucoPredict-AI/BackEnd/JS/agregar_clinica.js"></script>
+<script type="module" src="/GlucoPredict-AI/BackEnd/JS/auth-guard.js"></script>
+</body>
+</html>

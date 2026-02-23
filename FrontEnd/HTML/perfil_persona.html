@@ -5,31 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
-    <link rel="stylesheet" href="/FrontEnd/CSS/perfil_persona.css">
-<link rel="stylesheet" href="/FrontEnd/CSS/base.css">
+    <link rel="stylesheet" href="/GlucoPredict-AI/FrontEnd/CSS/perfil_persona.css">
+<link rel="stylesheet" href="/GlucoPredict-AI/FrontEnd/CSS/base.css">
 </head>
 <body>
-<img src="/FrontEnd/IMG/logo.png" alt="Logo" class="corner-logo">
+<img src="/GlucoPredict-AI/FrontEnd/IMG/logo.png" alt="Logo" class="corner-logo">
 
 <h2>Perfil personal</h2>
 
 <h3>Información personal</h3>
-<p>Edad: 40</p>
-<p>Sexo: Femenino</p>
+<p>Nombre: <span id="nombrePerfil">—</span></p>
+<p>Edad: <span id="edadPerfil">—</span></p>
 
 <h3>Historial clínico</h3>
-<button>Subir / Editar historial clínico</button>
+<p id="estadoHistorial">No registrado</p>
+<button id="btnHistorial">
+    Subir / Editar historial clínico
+</button>
 
 <h3>Resultado de predicción</h3>
-<p>Riesgo estimado de Diabetes Tipo 2: <strong>30%</strong></p>
+<p>
+    Riesgo estimado de Diabetes Tipo 2:
+    <strong id="riesgoPrediccion">—</strong>
+</p>
 
 <p><em>Este resultado es solo informativo y no sustituye la opinión médica.</em></p>
 
 <br><br>
-<button onclick="window.location.href='persona_dashboard.html'">Volver a mi panel</button>
+<button onclick="window.location.href='persona_dashboard.html'">
+    Volver a mi panel
+</button>
 
-<script type="module" src="../../BackEnd/JS/auth-guard.js"></script>
-
+<script type="module" src="/GlucoPredict-AI/BackEnd/JS/perfil_persona.js"></script>
+<script type="module" src="/GlucoPredict-AI/BackEnd/JS/auth-guard.js"></script>
 </body>
 </html>
 

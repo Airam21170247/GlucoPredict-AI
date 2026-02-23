@@ -5,31 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel del Médico</title>
-    <link rel="stylesheet" href="/FrontEnd/CSS/medico_dashboard.css">
-    <link rel="stylesheet" href="/FrontEnd/CSS/base.css">
+    <link rel="stylesheet" href="/GlucoPredict-AI/FrontEnd/CSS/medico_dashboard.css">
+    <link rel="stylesheet" href="/GlucoPredict-AI/FrontEnd/CSS/base.css">
 </head>
 <body>
-<img src="/FrontEnd/IMG/logo.png" alt="Logo" class="corner-logo">
+<img src="/GlucoPredict-AI/FrontEnd/IMG/logo.png" alt="Logo" class="corner-logo">
 
 <h2>Mis Clínicas</h2>
 
-<ul>
-    <li>
-        Clínica Central
-        <a href="clinica.html">Ver</a>
-    </li>
-    <li>
-        Consultorio Norte
-        <a href="clinica.html">Ver</a>
-    </li>
-</ul>
+<ul id="listaClinicas"></ul>
 
-<button>Agregar clínica</button>
+<button onclick="window.location.href='agregar_clinica.html'">Agregar clínica</button>
 
 <br><br>
-<button onclick="window.location.href='../../index.html'">Volver al inicio</button>
+<button onclick="window.location.href='panel_principal.html'">Volver al Panel Principal</button>
 
-<script type="module" src="../../BackEnd/JS/auth-guard.js"></script>
+<script type="module" src="/GlucoPredict-AI/BackEnd/JS/medico_dashboard.js"></script>
+<script type="module" src="/GlucoPredict-AI/BackEnd/JS/auth-guard.js"></script>
 
 </body>
 </html>

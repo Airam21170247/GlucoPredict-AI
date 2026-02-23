@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Perfil</title>
+    <link rel="stylesheet" href="/GlucoPredict-AI/FrontEnd/CSS/base.css">
+</head>
+<body>
+
+<h2>Agregar perfil personal</h2>
+
+<form id="formPerfil">
+    <input type="text" id="nombrePerfil" placeholder="Nombre completo" required><br><br>
+    <input type="number" id="edadPerfil" placeholder="Edad" required><br><br>
+    <button type="submit">Guardar perfil</button>
+</form>
+
+<br>
+<button onclick="window.location.href='persona_dashboard.html'">Volver</button>
+
+<script type="module" src="/GlucoPredict-AI/BackEnd/JS/agregar_perfil.js"></script>
+<script type="module" src="/GlucoPredict-AI/BackEnd/JS/auth-guard.js"></script>
+</body>
+</html>
