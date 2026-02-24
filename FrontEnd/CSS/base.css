@@ -163,7 +163,7 @@ body.no-corner-logo .corner-logo{
   height: auto;
   z-index: 1000;
   opacity: .92;
-  pointer-events: none;
+  cursor: pointer;
 }
 
 @media (max-width: 600px){
