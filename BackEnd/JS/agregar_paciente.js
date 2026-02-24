@@ -1,4 +1,4 @@
-import { db } from "./configurationFirebase.js";
+import { auth, db } from "./configurationFirebase.js";
 import { addDoc, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 // 🔹 Obtener clínica desde URL
@@ -18,6 +18,8 @@ btnVolver.onclick = () => {
 
 document.getElementById("formPaciente").addEventListener("submit", async e => {
     e.preventDefault();
+
+    const user = auth.currentUser;
 
     await addDoc(
         collection(db, "users", user.uid, "clinicas", clinicaId, "pacientes"),

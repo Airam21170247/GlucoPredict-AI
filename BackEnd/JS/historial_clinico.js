@@ -1,4 +1,4 @@
-import { auth,db } from "./configurationFirebase.js";
+import { auth, db } from "./configurationFirebase.js";
 import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
@@ -59,6 +59,8 @@ onAuthStateChanged(auth, async (user) => {
 document.getElementById("historialForm")
 .addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    const user = auth.currentUser;
 
     const data = {
         nombre: name.value || "No conocido",

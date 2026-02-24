@@ -1,8 +1,10 @@
-import { db } from "./configurationFirebase.js";
+import { auth, db } from "./configurationFirebase.js";
 import { addDoc, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 document.getElementById("formPerfil").addEventListener("submit", async e => {
     e.preventDefault();
+
+    const user = auth.currentUser;
 
     await addDoc(collection(db, "users", user.uid, "perfiles"), {
         nombre: nombrePerfil.value,
