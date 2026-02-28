@@ -81,7 +81,9 @@ onAuthStateChanged(auth, async (user) => {
         /* -----------------------------
            PREDICCIÓN
         ----------------------------- */
-        const riesgo = calcularRiesgo(historial);
+
+        
+        const riesgo = await calcularRiesgo(historial);
         riesgoEl.innerText = riesgo + "%";
 
     } catch (error) {

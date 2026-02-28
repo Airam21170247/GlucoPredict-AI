@@ -1,5 +1,13 @@
 - Install flask
 pip install flask-cors
+pip install flask
 
 -Install firebase
 npm install firebase
+
+-Install PDF
+pip install pdfplumber
+
+-Install Python
+pip install pytesseract
+pip install Pillow
