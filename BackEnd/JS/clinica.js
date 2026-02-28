@@ -17,7 +17,10 @@ if (!clinicaId) {
 }
 
 onAuthStateChanged(auth, async (user) => {
-    if (!user) return;
+    if (!user) {
+        window.location.href = "../../index.html";
+        return;
+    }
 
     // 🔹 Obtener datos de la clínica
     const clinicaRef = doc(db, "users", user.uid, "clinicas", clinicaId);

@@ -5,7 +5,10 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/fi
 const lista = document.getElementById("listaClinicas");
 
 onAuthStateChanged(auth, async (user) => {
-    if (!user) return;
+    if (!user) {
+        window.location.href = "../../index.html";
+        return;
+    }
 
     lista.innerHTML = "";
 

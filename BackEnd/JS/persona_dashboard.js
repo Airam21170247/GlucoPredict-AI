@@ -4,7 +4,10 @@ import { collection,getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/fi
 const lista = document.getElementById("listaPerfiles");
 
 auth.onAuthStateChanged(async (user) => {
-    if (!user) return;
+    if (!user) {
+        window.location.href = "../../index.html";
+        return;
+    }
 
     const ref = collection(db, "users", user.uid, "perfiles");
     const snapshot = await getDocs(ref);

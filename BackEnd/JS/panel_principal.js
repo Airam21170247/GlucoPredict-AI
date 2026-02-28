@@ -1,8 +1,10 @@
 import { auth } from "./configurationFirebase.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-onAuthStateChanged(auth, user => {
-    if (!user) window.location.href = "../../index.html";
+auth.onAuthStateChanged(user => {
+    if (!user) {
+        window.location.href = "../../index.html";
+    }
 });
 
 document.getElementById("btnClinicas").onclick = () =>
