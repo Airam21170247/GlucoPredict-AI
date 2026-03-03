@@ -1,4 +1,4 @@
-import { auth, db } from "./configurationFirebase.js";
+﻿import { auth, db } from "./configurationFirebase.js";
 import { collection,getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const lista = document.getElementById("listaPerfiles");
@@ -19,12 +19,15 @@ auth.onAuthStateChanged(async (user) => {
         return;
     }
 
-    snapshot.forEach(doc => {
+    snapshot.forEach((doc) => {
         const data = doc.data();
 
         const li = document.createElement("li");
+        const edadTexto = data.edad ? `Edad: ${data.edad}` : "Edad: -";
+        const sexoTexto = data.sexo ? ` | Sexo: ${data.sexo}` : "";
+
         li.innerHTML = `
-            <strong>${data.nombre}</strong> (Edad: ${data.edad})
+            <strong>${data.nombre || "Perfil sin nombre"}</strong> (${edadTexto}${sexoTexto})
             <a href="perfil_persona.html?id=${doc.id}">Ver</a>
         `;
 

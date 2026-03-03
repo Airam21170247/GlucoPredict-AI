@@ -1,18 +1,17 @@
-import { auth, db } from "./configurationFirebase.js";
+﻿import { auth, db } from "./configurationFirebase.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { calcularRiesgo } from "./prediccion.js";
 
-
 /* -----------------------------
-   PARÁMETROS URL
+   PARAMETROS URL
 ----------------------------- */
 const params = new URLSearchParams(window.location.search);
 const pacienteId = params.get("id");
 const clinicaId = params.get("clinica");
 
 if (!pacienteId || !clinicaId) {
-    alert("Paciente o clínica no válidos");
+    alert("Paciente o clinica no validos");
     window.location.href = "panel_principal.html";
 }
 
@@ -21,14 +20,29 @@ if (!pacienteId || !clinicaId) {
 ----------------------------- */
 const nombreEl = document.getElementById("nombrePaciente");
 const edadEl = document.getElementById("edadPaciente");
+const sexoEl = document.getElementById("sexoPaciente");
+const pesoEl = document.getElementById("pesoPaciente");
+const alturaEl = document.getElementById("alturaPaciente");
+const telefonoEl = document.getElementById("telefonoPaciente");
+const correoEl = document.getElementById("correoPaciente");
+const contactoEmergenciaEl = document.getElementById("contactoEmergenciaPaciente");
+const tipoSangreEl = document.getElementById("tipoSangrePaciente");
+const observacionesEl = document.getElementById("observacionesPaciente");
 const estadoHistorialEl = document.getElementById("estadoHistorial");
 const riesgoEl = document.getElementById("riesgoPrediccion");
 
 const btnHistorial = document.getElementById("btnHistorial");
 const btnVolver = document.getElementById("btnVolver");
 
+function textoSeguro(valor, sufijo = "") {
+    if (valor === null || valor === undefined || valor === "") {
+        return "-";
+    }
+    return `${valor}${sufijo}`;
+}
+
 /* -----------------------------
-   AUTENTICACIÓN + CARGA
+   AUTENTICACION + CARGA
 ----------------------------- */
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
@@ -57,11 +71,19 @@ onAuthStateChanged(auth, async (user) => {
 
         const paciente = pacienteSnap.data();
 
-        nombreEl.innerText = paciente.nombre || "—";
-        edadEl.innerText = paciente.edad || "—";
+        nombreEl.innerText = textoSeguro(paciente.nombre);
+        edadEl.innerText = textoSeguro(paciente.edad);
+        sexoEl.innerText = textoSeguro(paciente.sexo);
+        pesoEl.innerText = textoSeguro(paciente.peso, " kg");
+        alturaEl.innerText = textoSeguro(paciente.altura, " cm");
+        telefonoEl.innerText = textoSeguro(paciente.telefono);
+        correoEl.innerText = textoSeguro(paciente.correo);
+        contactoEmergenciaEl.innerText = textoSeguro(paciente.contactoEmergencia);
+        tipoSangreEl.innerText = textoSeguro(paciente.tipoSangre);
+        observacionesEl.innerText = textoSeguro(paciente.observaciones);
 
         /* -----------------------------
-           HISTORIAL CLÍNICO
+           HISTORIAL CLINICO
         ----------------------------- */
         const historialRef = doc(
             db,
@@ -75,7 +97,7 @@ onAuthStateChanged(auth, async (user) => {
 
         if (!historialSnap.exists()) {
             estadoHistorialEl.innerText = "No registrado";
-            riesgoEl.innerText = "—";
+            riesgoEl.innerText = "-";
             return;
         }
 
@@ -84,7 +106,7 @@ onAuthStateChanged(auth, async (user) => {
         const historial = historialSnap.data();
 
         /* -----------------------------
-           PREDICCIÓN
+           PREDICCION
         ----------------------------- */
         const riesgo = await calcularRiesgo(historial);
         riesgoEl.innerText = riesgo + "%";
@@ -96,7 +118,7 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 /* -----------------------------
-   NAVEGACIÓN
+   NAVEGACION
 ----------------------------- */
 btnHistorial.onclick = () => {
     window.location.href =

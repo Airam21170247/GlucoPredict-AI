@@ -1,4 +1,4 @@
-import { auth, db } from "./configurationFirebase.js";
+﻿import { auth, db } from "./configurationFirebase.js";
 import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
@@ -16,16 +16,18 @@ onAuthStateChanged(auth, async (user) => {
     const snapshot = await getDocs(ref);
 
     if (snapshot.empty) {
-        lista.innerHTML = "<li>No tienes clínicas registradas</li>";
+        lista.innerHTML = "<li>No tienes clinicas registradas</li>";
         return;
     }
 
-    snapshot.forEach(doc => {
+    snapshot.forEach((doc) => {
         const clinica = doc.data();
 
         const li = document.createElement("li");
+        const telefonoTexto = clinica.telefono ? ` | Tel: ${clinica.telefono}` : "";
+
         li.innerHTML = `
-            ${clinica.nombre}
+            ${clinica.nombre || "Clinica sin nombre"}${telefonoTexto}
             <a href="clinica.html?id=${doc.id}">Ver</a>
         `;
 

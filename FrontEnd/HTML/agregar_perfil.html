@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Perfil</title>
     <link rel="stylesheet" href="/GlucoPredict-AI/FrontEnd/CSS/base.css">
     <link rel="stylesheet" href="/GlucoPredict-AI/FrontEnd/CSS/agregar_perfil.css">
@@ -12,7 +13,29 @@
 
 <form id="formPerfil">
     <input type="text" id="nombrePerfil" placeholder="Nombre completo" required><br><br>
-    <input type="number" id="edadPerfil" placeholder="Edad" required><br><br>
+    <input type="number" id="edadPerfil" placeholder="Edad" min="0" max="120" required><br><br>
+    <select id="sexoPerfil" required>
+        <option value="" disabled selected>Sexo</option>
+        <option value="Femenino">Femenino</option>
+        <option value="Masculino">Masculino</option>
+        <option value="Otro">Otro</option>
+    </select><br><br>
+    <input type="number" id="pesoPerfil" placeholder="Peso (kg)" min="1" max="400" step="0.1"><br><br>
+    <input type="number" id="alturaPerfil" placeholder="Altura (cm)" min="30" max="250" step="0.1"><br><br>
+    <input type="tel" id="telefonoPerfil" placeholder="Telefono"><br><br>
+    <input type="email" id="correoPerfil" placeholder="Correo electronico"><br><br>
+    <select id="antecedentesDiabetesPerfil">
+        <option value="" selected>Antecedentes familiares de diabetes</option>
+        <option value="Si">Si</option>
+        <option value="No">No</option>
+    </select><br><br>
+    <select id="actividadFisicaPerfil">
+        <option value="" selected>Nivel de actividad fisica</option>
+        <option value="Baja">Baja</option>
+        <option value="Moderada">Moderada</option>
+        <option value="Alta">Alta</option>
+    </select><br><br>
+    <textarea id="observacionesPerfil" placeholder="Observaciones relevantes" rows="4"></textarea><br><br>
     <button type="submit">Guardar perfil</button>
 </form>
 
