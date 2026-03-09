@@ -26,8 +26,9 @@ import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/1
     const password = document.getElementById("password").value;
 
     try {
-        await signInWithEmailAndPassword(auth, email, password);
-        window.location.href = "/FrontEnd/HTML/panel_principal.html";
+      const result = await signInWithEmailAndPassword(auth, email, password);
+      console.log("Usuario:", result.user);
+      window.location.href = "FrontEnd/HTML/panel_principal.html";
     } catch (err) {
         alert("Credenciales incorrectas");
     }

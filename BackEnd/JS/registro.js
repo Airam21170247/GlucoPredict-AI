@@ -2,7 +2,7 @@ import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebase
 import { auth, db } from "./configurationFirebase.js";
 import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-registroForm.addEventListener("submit", async e => {
+document.getElementById("registroForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const email = emailInput.value;
@@ -15,5 +15,7 @@ registroForm.addEventListener("submit", async e => {
         createdAt: new Date()
     });
 
+    // Si el registro fue exitoso, redirige al usuario a la página de inicio de sesión
     window.location.href = "../../index.html";
+    console.log("Usuario registrado con éxito:", cred.user);
 });

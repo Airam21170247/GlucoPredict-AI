@@ -13,24 +13,26 @@
 
 <h2>Registro de usuario</h2>
 
-<form>
+<form id="registroForm">
     <label>Correo:</label><br>
-    <input type="email"><br><br>
+    <input type="email" id="emailInput" required><br><br>
 
     <label>Contraseña:</label><br>
-    <input type="password"><br><br>
+    <input type="password" id="passwordInput" required><br><br>
 
     <label>Selecciona una versión:</label><br>
-    <select>
+    <select id="versionSelect">
         <option>Gratis</option>
         <option>De paga</option>
-    </select><br><br>
-
-    <a href="rol.html">Continuar</a>
+    </select>
+    <br><br>
+    <button type="submit">Registrarse</button>
 </form>
 
 <br><br>
 <button onclick="window.location.href='../../index.html'">Volver al inicio</button>
+
+<script type="module" src="/GlucoPredict-AI/BackEnd/JS/registro.js"></script>
 
 </body>
 </html>
