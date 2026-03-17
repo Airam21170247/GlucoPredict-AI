@@ -1,5 +1,7 @@
+const API_URL = "https://expertsystem-glucopredict-ai.onrender.com";
+
 export async function calcularRiesgo(historial) {
-    const response = await fetch("http://127.0.0.1:5000/api/predict", {
+    const response = await fetch(`${API_URL}/api/predict`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(historial)
@@ -9,8 +11,8 @@ export async function calcularRiesgo(historial) {
     return data.historial.porcentajeRiesgo;
 }
 
-export async function obtenerExplicaciones(historial) {
-    const response = await fetch("http://127.0.0.1:5000/api/predict", {
+export async function obtenerExplicacionesMedica(historial) {
+    const response = await fetch(`${API_URL}/api/predict`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(historial)
@@ -20,8 +22,19 @@ export async function obtenerExplicaciones(historial) {
     return data.historial.explicacion_medica || [];
 }
 
+export async function obtenerExplicacionesGeneral(historial) {
+    const response = await fetch(`${API_URL}/api/predict`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(historial)
+    });
+
+    const data = await response.json();
+    return data.historial.explicacion_general || [];
+}
+
 export async function obtenerRecomendaciones(historial) {
-    const response = await fetch("http://127.0.0.1:5000/api/predict", {
+    const response = await fetch(`${API_URL}/api/predict`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(historial)

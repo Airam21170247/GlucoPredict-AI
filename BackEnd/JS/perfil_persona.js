@@ -1,7 +1,7 @@
 ﻿import { auth, db } from "./configurationFirebase.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { calcularRiesgo, obtenerExplicaciones, obtenerRecomendaciones } from "./prediccion.js";
+import { calcularRiesgo, obtenerExplicacionesGeneral, obtenerRecomendaciones } from "./prediccion.js";
 
 /* -----------------------------
    PARAMETROS URL
@@ -82,9 +82,33 @@ function crearGraficaFactores(historial) {
         Edad: historial.edad >= 45 ? 15 : 0,
         IMC: historial.imc >= 30 ? 20 : historial.imc >= 25 ? 10 : 0,
         Glucosa: historial.glucosa >= 126 ? 30 : historial.glucosa >= 100 ? 15 : 0,
-        Presión: historial.presion_sistolica >= 140 ? 10 : 0,
-        Antecedentes: historial.antecedentes_familiares_diabetes ? 20 : 0
+        Presión: historial.presion_sistolica >= 140 ? 10 : historial.presion_sistolica >= 120 ? 5 : 0,
+        Antecedentes: historial.antecedentes_familiares_diabetes ? 20 : 0,
+        Actividad: historial.actividad_fisica ? historial.actividad_fisica === "sedentario" ? 10 : 0 : 0
     };
+
+    // Colores dinámicos según riesgo
+    const colores = Object.keys(factores).map(factor => {
+        switch (factor) {
+            case "IMC":
+                if (historial.imc >= 30) return "red";      // Alto
+                if (historial.imc >= 25) return "yellow";   // Medio
+                return "green";                             // Bajo
+            case "Glucosa":
+                if (historial.glucosa >= 126) return "red";     // Alto
+                if (historial.glucosa >= 100) return "yellow";  // Medio
+                return "green";                                 // Bajo
+            case "Presión":
+                if (historial.presion_sistolica >= 140) return "red";     // Alto
+                if (historial.presion_sistolica >= 120) return "yellow";  // Medio
+                return "green";                                           // Bajo
+            case "Actividad":
+                if (historial.actividad_fisica === "sedentario") return "red";    // Inactivo
+                return "green";                                                   // Activo
+            default:
+                return "#1976D2"; // Azul para los demás
+        }
+    });
 
     factoresChartInstance = new Chart(ctx, {
         type: "bar",
@@ -93,7 +117,7 @@ function crearGraficaFactores(historial) {
             datasets: [{
                 label: "Impacto en el riesgo (%)",
                 data: Object.values(factores),
-                backgroundColor: "#1976D2"
+                backgroundColor: colores
             }]
         },
         options: {
@@ -180,24 +204,39 @@ onAuthStateChanged(auth, async (user) => {
            PREDICCION
         ----------------------------- */
         const riesgo = await calcularRiesgo(historial);
-        riesgoEl.innerText = riesgo + "%";
-        const explicaciones = await obtenerExplicaciones(historial);
+        riesgoEl.style.color = "#000";
+        if (riesgo === null) {
+            riesgoEl.innerText = "-";
+        }else if (riesgo < 30) {
+            riesgoEl.innerText = riesgo + "% (Bajo)";
+            riesgoEl.style.color = "#4CAF50";
+        } else if (riesgo < 60) {
+            riesgoEl.innerText = riesgo + "% (Moderado)";
+            riesgoEl.style.color = "#FFC107";
+        } else if (riesgo >= 60) {
+            riesgoEl.innerText = riesgo + "% (Alto)";
+            riesgoEl.style.color = "#F44336";
+        }else {
+            riesgoEl.innerText = "Desconocido";
+            riesgoEl.style.color = "#000";
+        }
+        const explicaciones = await obtenerExplicacionesGeneral(historial);
         explicacionesEl.innerHTML = "";
         explicaciones.forEach(explicacion => {
             const li = document.createElement("li");
-            li.innerText = "- " + explicacion;
+            li.innerText = "⚠ - " + explicacion;
             explicacionesEl.appendChild(li);
         });
         const recomendaciones = await obtenerRecomendaciones(historial);
         recomendacionesEl.innerHTML = "";
         recomendaciones.forEach(recomendacion => {
             const li = document.createElement("li");
-            li.innerText = "- " + recomendacion;
+            li.innerText = "✔ - " + recomendacion;
             recomendacionesEl.appendChild(li);
         });
         
-        //crearGraficaRiesgo(riesgo);
-        //crearGraficaFactores(historial);
+        crearGraficaRiesgo(riesgo);
+        crearGraficaFactores(historial);
 
     } catch (error) {
         console.error("Error cargando perfil:", error);
