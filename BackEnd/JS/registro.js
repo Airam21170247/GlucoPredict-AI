@@ -2,20 +2,67 @@ import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebase
 import { auth, db } from "./configurationFirebase.js";
 import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-document.getElementById("registroForm").addEventListener("submit", async (e) => {
+const form = document.getElementById("registroForm");
+const errorMsg = document.createElement("p");
+errorMsg.style.color = "red";
+form.appendChild(errorMsg);
+
+form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const email = emailInput.value;
+    const email = emailInput.value.trim();
     const password = passwordInput.value;
 
-    const cred = await createUserWithEmailAndPassword(auth, email, password);
+    errorMsg.innerText = "";
 
-    await setDoc(doc(db, "users", cred.user.uid), {
-        email,
-        createdAt: new Date()
-    });
+    // -----------------------------
+    // VALIDACIONES PROPIAS
+    // -----------------------------
+    if (!email.includes("@") || !email.includes(".")) {
+        errorMsg.innerText = "Correo no válido.";
+        return;
+    }
 
-    // Si el registro fue exitoso, redirige al usuario a la página de inicio de sesión
-    window.location.href = "../../index.html";
-    console.log("Usuario registrado con éxito:", cred.user);
+    if (password.length < 6) {
+        errorMsg.innerText = "La contraseña debe tener al menos 6 caracteres.";
+        return;
+    }
+
+    try {
+        const cred = await createUserWithEmailAndPassword(auth, email, password);
+
+        // -----------------------------
+        // GUARDAR EN FIRESTORE
+        // -----------------------------
+        await setDoc(doc(db, "users", cred.user.uid), {
+            email,
+            tipo: "GRATIS", // 🔥 IMPORTANTE
+            createdAt: new Date()
+        });
+
+        console.log("Usuario registrado:", cred.user);
+
+        // Redirigir a pantalla de pago
+        window.location.href = "paga.html?where=registro";
+
+    } catch (error) {
+        console.error(error);
+
+        // -----------------------------
+        // ERRORES FIREBASE
+        // -----------------------------
+        switch (error.code) {
+            case "auth/email-already-in-use":
+                errorMsg.innerText = "El correo ya está registrado.";
+                break;
+            case "auth/invalid-email":
+                errorMsg.innerText = "Formato de correo inválido.";
+                break;
+            case "auth/weak-password":
+                errorMsg.innerText = "La contraseña es muy débil.";
+                break;
+            default:
+                errorMsg.innerText = "Error al registrar usuario.";
+        }
+    }
 });

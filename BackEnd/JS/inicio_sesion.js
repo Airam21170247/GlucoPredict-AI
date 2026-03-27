@@ -1,23 +1,70 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { signInWithEmailAndPassword } 
+  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
 import { firebaseConfig } from "./configurationFirebase.js";
-import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { db } from "./configurationFirebase.js";
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-  document.getElementById("googleLogin").addEventListener("click", async () => {
+document.getElementById("googleLogin").addEventListener("click", async () => {
     const provider = new GoogleAuthProvider();
+
     try {
-      const result = await signInWithPopup(auth, provider);
-      console.log("Usuario:", result.user);
-      // Redirigir al panel principal
-      window.location.href = "FrontEnd/HTML/panel_principal.html";
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+
+        console.log("Usuario:", user);
+
+        // 🔥 Detectar si es nuevo usuario
+        const isNewUser = result._tokenResponse.isNewUser;
+
+        const userRef = doc(db, "users", user.uid);
+
+        if (isNewUser) {
+            // -----------------------------
+            // CREAR DOCUMENTO (PRIMER LOGIN)
+            // -----------------------------
+            await setDoc(userRef, {
+                email: user.email,
+                nombre: user.displayName || "",
+                tipo: "GRATIS",
+                createdAt: new Date()
+            });
+
+            console.log("Nuevo usuario creado en Firestore");
+
+            // 👉 Mandar a pantalla de pago
+            window.location.href = "FrontEnd/HTML/paga.html?where=servicio";
+
+        } else {
+            // -----------------------------
+            // USUARIO EXISTENTE
+            // -----------------------------
+            const snap = await getDoc(userRef);
+
+            if (!snap.exists()) {
+                // 🔥 Seguridad extra (por si algo falló antes)
+                await setDoc(userRef, {
+                    email: user.email,
+                    nombre: user.displayName || "",
+                    tipo: "GRATIS",
+                    createdAt: new Date()
+                });
+            }
+
+            // 👉 Ir directo al panel
+            window.location.href = "FrontEnd/HTML/panel_principal.html";
+        }
+
     } catch (error) {
-      console.error("Error en login:", error);
-      alert("Error: " + error.message);
+        console.error("Error en login:", error);
+        alert("Error: " + error.message);
     }
-  });
+});
 
   document.getElementById("loginForm").addEventListener("submit", async e => {
     e.preventDefault();

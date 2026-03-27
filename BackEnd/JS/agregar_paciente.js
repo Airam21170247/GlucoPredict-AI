@@ -1,6 +1,27 @@
 ﻿import { auth, db } from "./configurationFirebase.js";
 import { addDoc, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { MAX_PACIENTES } from "./reestrinccionesLicencia.js";
+
+onAuthStateChanged(auth, async (user) => {
+    const params = new URLSearchParams(window.location.search);
+    const clinicaId = params.get("clinica");
+    const ref = collection(db, "users", user.uid, "clinicas", clinicaId, "pacientes");
+    const snapshot = await getDocs(ref);
+    const numeroPacientes = snapshot.size;
+
+    console.log("Número de pacientes registrados:", numeroPacientes);
+    console.log("Límite máximo de pacientes:", MAX_PACIENTES);
+
+    if (numeroPacientes >= MAX_PACIENTES) {
+        alert(`Has alcanzado el límite de ${MAX_PACIENTES} pacientes. No puedes agregar más.`);
+        window.location.href = `clinica.html?id=${clinicaId}`;
+    }
+});
+
 function calcularIMC(peso, alturaCm) {
     const pesoNum = Number(peso);
     const alturaNum = Number(alturaCm);

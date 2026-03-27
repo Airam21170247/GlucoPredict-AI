@@ -3,6 +3,8 @@ import { doc, getDoc, collection, getDocs } from "https://www.gstatic.com/fireba
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { deleteClinicaCompleta, deletePacienteCompleto } from "./crud_helpers.js";
 
+import { MAX_PACIENTES } from "./reestrinccionesLicencia.js";
+
 const params = new URLSearchParams(window.location.search);
 const clinicaId = params.get("id");
 
@@ -16,6 +18,8 @@ const horarioClinica = document.getElementById("horarioClinica");
 const listaPacientes = document.getElementById("listaPacientes");
 const btnAgregarPaciente = document.getElementById("btnAgregarPaciente");
 const btnEliminarClinica = document.getElementById("btnEliminarClinica");
+
+
 
 if (!clinicaId) {
     alert("Clinica no encontrada");
@@ -92,6 +96,25 @@ onAuthStateChanged(auth, async (user) => {
     const pacientesRef = collection(db, "users", user.uid, "clinicas", clinicaId, "pacientes");
     const snapshot = await getDocs(pacientesRef);
     listaPacientes.innerHTML = "";
+
+    const numeroPacientes = snapshot.size;
+    console.log("Número de pacientes:", numeroPacientes);
+
+    if (numeroPacientes >= MAX_PACIENTES) {
+        btnAgregarPaciente.title = "Solo disponible maximo 3 pacientes para usuarios no PAGA. Actualiza a PAGA para agregar más.";
+        btnAgregarPaciente.style.backgroundColor = "#ccc";
+        btnAgregarPaciente.style.cursor = "not-allowed";
+        btnAgregarPaciente.onclick = () => {
+            const respuesta = confirm("Solo disponible maximo 3 pacientes para usuarios no PAGA. ¿Deseas ir a la página de pago?");
+            if (respuesta) {
+                // El usuario presionó "Aceptar"
+                window.location.href = "../../FrontEnd/HTML/paga.html?where=clinicas";
+            } else {
+                // El usuario presionó "Cancelar"
+                console.log("El usuario decidió no ir a la página de pago");
+            }
+        };
+    }
 
     if (snapshot.empty) {
         listaPacientes.innerHTML = "<li>No hay pacientes registrados</li>";

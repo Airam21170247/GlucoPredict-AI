@@ -1,16 +1,18 @@
-﻿body{
+﻿/* =========================
+   BASE
+========================= */
+body{
   min-height: 100vh;
   display:flex;
   flex-direction:column;
-  justify-content:center;
   align-items:center;
-  gap: 14px;
-  padding: 32px 16px;
+  gap: 20px;
+  padding: 24px 16px;
 }
 
 h1{
   margin: 0;
-  font-size: 2.2rem;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
   color: var(--primary);
 }
 
@@ -23,75 +25,224 @@ p{
   margin: 0;
   color: var(--muted);
   text-align:center;
-  max-width: 56ch;
+  max-width: 60ch;
 }
 
-a{
-  width: min(420px, 100%);
-  text-align:center;
-  padding: 12px 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(185,211,238,.9);
-  background: rgba(255,255,255,.78);
-  box-shadow: 0 12px 26px rgba(37, 64, 112, 0.10);
-  text-decoration:none;
-}
-a:hover{
-  text-decoration:none;
-  transform: translateY(-1px);
+/* =========================
+   NAVBAR
+========================= */
+.navbar{
+  width: 100%;
+  max-width: 1100px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-
-
-form{
-  width: min(520px, 100%);
-  padding: 18px 20px;
+.logo-nav{
+  width: 48px;
 }
 
-form br, br { display:none; }
+.nav-actions{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
 
-input{
+/* =========================
+   HERO
+========================= */
+.hero{
+  width: 100%;
+  max-width: 1100px;
+  display:flex;
+  gap: 40px;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.hero-text{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap: 12px;
+}
+
+.logo-hero{
+  width: auto;
   margin-bottom: 10px;
 }
 
-hr{
-  width: min(520px, 100%);
-  border: none;
-  border-top: 1px solid var(--border);
+.hero-card{
+  flex:1;
+  max-width: 400px;
+  background: rgba(255,255,255,0.95);
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* =========================
+   FORM
+========================= */
+form{
+  display:flex;
+  flex-direction:column;
+  gap: 10px;
+}
+
+input{
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
 }
 
 button{
-  width: min(520px, 100%);
+  padding: 5px;
+  border-radius: 10px;
+  cursor:pointer;
 }
 
+/* =========================
+   BOTONES
+========================= */
+.btn-primary{
+  background: var(--primary);
+  color: white;
+  padding: 10px 14px;
+  border-radius: 10px;
+  text-decoration:none;
+}
+
+.btn-secondary{
+  border: 1px solid var(--primary);
+  padding: 10px 14px;
+  border-radius: 10px;
+  text-decoration:none;
+}
+
+/* =========================
+   FEATURES / CARDS
+========================= */
+.features{
+  width: 100%;
+  max-width: 1100px;
+  text-align:center;
+}
+
+.cards{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 20px;
+  justify-content:center;
+  margin-top: 10px;
+}
+
+.card{
+  width: 260px;
+  background: rgba(255,255,255,0.9);
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* =========================
+   SECTIONS
+========================= */
+.section{
+  max-width: 700px;
+  text-align:center;
+}
+
+/* =========================
+   CTA
+========================= */
+.cta{
+  text-align:center;
+  margin-top: 20px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer{
+  margin-top: 30px;
+  opacity: 0.6;
+}
+
+/* =========================
+   GOOGLE BUTTON
+========================= */
 #googleLogin{
   background: var(--primary-soft);
   color: var(--primary);
-  box-shadow: none;
   border: 1px solid rgba(185,211,238,.9);
 }
 
-.logo{
-  width: clamp(84px, 24vw, 140px);
-  height: auto;
+/* =========================
+   ANIMATION
+========================= */
+.hero{
+  animation: fadeIn 0.8s ease;
 }
 
-@media (max-width: 600px){
-  body{
-    padding: 24px 12px;
-    gap: 12px;
+@keyframes fadeIn{
+  from{ opacity:0; transform: translateY(10px);}
+  to{ opacity:1; transform: translateY(0);}
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 900px){
+
+  .hero{
+    flex-direction: column;
+    gap: 25px;
   }
 
-  h1{
-    font-size: 1.8rem;
+  .hero-card{
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .hero-text{
+    align-items: center;
     text-align: center;
   }
 
-  p{
-    font-size: 0.95rem;
+}
+
+@media (max-width: 600px){
+
+  body{
+    padding: 16px 10px;
   }
 
-  form{
+  h1{
+    font-size: 1.6rem;
+  }
+
+  p{
+    font-size: 0.9rem;
+  }
+
+  .navbar{
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-actions{
+    justify-content:center;
+  }
+
+  .card{
+    width: 100%;
+  }
+
+  .hero-card{
     padding: 16px;
   }
+
 }
+

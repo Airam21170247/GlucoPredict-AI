@@ -155,7 +155,7 @@ async function simular() {
             ? `El riesgo podría disminuir aproximadamente ${Math.abs(cambio).toFixed(1)}% en ${semanas} semanas.`
             : `El riesgo podría aumentar aproximadamente ${cambio.toFixed(1)}%.`;
 
-    riesgoFinalEl.innerText += "Riesgo final previsto: " + resultados[resultados.length - 1].toFixed(1) + "%.";
+    riesgoFinalEl.innerText = "Riesgo final previsto: " + resultados[resultados.length - 1].toFixed(1) + "%.";
 }
 
 /* -----------------------------

@@ -1,6 +1,29 @@
 ﻿import { auth, db } from "./configurationFirebase.js";
 import { addDoc, collection } from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+import { MAX_CLINICAS } from "./reestrinccionesLicencia.js";
+
+
+onAuthStateChanged(auth, async (user) => {
+    const ref = collection(db, "users", user.uid, "clinicas");
+    const snapshot = await getDocs(ref);
+
+    const numeroClinicas = snapshot.size;
+
+    console.log("Número de clínicas registradas:", numeroClinicas);
+    console.log("Límite máximo de clínicas:", MAX_CLINICAS);
+
+    if (numeroClinicas >= MAX_CLINICAS) {
+        alert(`Has alcanzado el límite de ${MAX_CLINICAS} clínicas. No puedes agregar más.`);
+        window.location.href = "medico_dashboard.html";
+    }
+
+});
+
 
 const form = document.getElementById("formClinica");
 

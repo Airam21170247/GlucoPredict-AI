@@ -1,38 +1,131 @@
 ﻿<!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GlucoPredict-AI</title>
-    <link rel="stylesheet" href="/GlucoPredict-AI/FrontEnd/CSS/index.css">
-  <link rel="stylesheet" href="/GlucoPredict-AI/FrontEnd/CSS/base.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GlucoPredict-AI</title>
+
+<link rel="stylesheet" href="/GlucoPredict-AI/FrontEnd/CSS/index.css">
+<link rel="stylesheet" href="/GlucoPredict-AI/FrontEnd/CSS/base.css">
+
 </head>
+
 <body class="no-corner-logo">
-<img src="/GlucoPredict-AI/FrontEnd/img/logo.png" alt="Logo" class="corner-logo">
 
-<img src="/GlucoPredict-AI/FrontEnd/img/logosolo.png" alt="Logo de GlucoPredict-AI" class="logo">
+<!-- NAVBAR -->
+<header class="navbar">
+    <img src="/GlucoPredict-AI/FrontEnd/img/logosolo.png" class="logo-nav">
+    <div class="nav-actions">
+        <a href="#login">Iniciar sesión</a>
+        <a href="/GlucoPredict-AI/FrontEnd/HTML/registro.html" class="btn-primary">Registrarse</a>
+    </div>
+</header>
 
-<h1>GlucoPredict-AI</h1>
-<p>Plataforma de apoyo para la evaluación del riesgo de Diabetes Tipo 2</p>
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-text">
+        <image src="/GlucoPredict-AI/FrontEnd/img/logo.png" class="logo-hero">
+        <h1>Predice tu riesgo de Diabetes Tipo 2</h1>
+        <p>
+            Utiliza inteligencia artificial y análisis clínico para detectar riesgos
+            de manera temprana y tomar mejores decisiones para tu salud.
+        </p>
 
-  <!-- Formulario de correo y contraseña -->
-  <form id="loginForm">
-    <input type="email" id="email" placeholder="Correo electronico" required><br></br>
-    <input type="password" id="password" placeholder="Contraseña" required><br></br>
-    <button type="submit">Ingresar</button>
-  </form>
+        <div class="hero-buttons">
+            <a href="#login" class="btn-primary">Comenzar</a>
+            <a href="#info" class="btn-secondary">Saber más</a>
+        </div>
+    </div>
 
-  <hr>
+    <div class="hero-card" id="login">
+        <h2>Iniciar sesión</h2>
 
-  <!-- Botones de proveedores externos -->
-  <br>
-  <button id="googleLogin">Iniciar con Google</button>
+        <form id="loginForm">
+            <input type="email" id="email" placeholder="Correo electrónico" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <button type="submit">Ingresar</button>
+        </form>
 
-  <!-- Firebase SDK -->
-  <script type="module" src="/GlucoPredict-AI/BackEnd/JS/inicio_sesion.js"></script>
+        <hr>
 
-  <a href="/GlucoPredict-AI/FrontEnd/HTML/registro.html">Registrarse</a>
+        <button id="googleLogin">Continuar con Google</button>
+
+        <p class="registro-link">
+            ¿No tienes cuenta?
+            <a href="/GlucoPredict-AI/FrontEnd/HTML/registro.html">Regístrate</a>
+        </p>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="info">
+    <h2>¿Qué ofrece GlucoPredict-AI?</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Predicción inteligente</h3>
+            <p>Evalúa el riesgo de diabetes tipo 2 con base en datos clínicos.</p>
+        </div>
+
+        <div class="card">
+            <h3>Explicaciones claras</h3>
+            <p>Entiende por qué tienes cierto nivel de riesgo.</p>
+        </div>
+
+        <div class="card">
+            <h3>Recomendaciones</h3>
+            <p>Recibe acciones concretas para mejorar tu salud.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="section">
+    <h2>La problemática</h2>
+    <p>
+        La diabetes es una de las principales causas de muerte en México.
+        La detección tardía aumenta riesgos, complicaciones y costos.
+    </p>
+</section>
+
+<!-- BENEFITS -->
+<section class="features">
+    <h2>Beneficios</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Rápido</h3>
+            <p>Obtén resultados en segundos.</p>
+        </div>
+
+        <div class="card">
+            <h3>Accesible</h3>
+            <p>Disponible para cualquier persona.</p>
+        </div>
+
+        <div class="card">
+            <h3>Preventivo</h3>
+            <p>Ayuda a evitar enfermedades antes de que ocurran.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta">
+    <h2>Empieza hoy a cuidar tu salud</h2>
+    <a href="#login" class="btn-primary">Probar ahora</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 GlucoPredict-AI</p>
+</footer>
+
+<script type="module" src="/GlucoPredict-AI/BackEnd/JS/inicio_sesion.js"></script>
 
 </body>
 </html>

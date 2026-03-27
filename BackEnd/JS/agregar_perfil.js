@@ -1,5 +1,26 @@
 ﻿import { auth, db } from "./configurationFirebase.js";
 import { addDoc, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { MAX_PERFILES } from "./reestrinccionesLicencia.js";
+
+onAuthStateChanged(auth, async (user) => {
+    const ref = collection(db, "users", user.uid, "perfiles");
+    const snapshot = await getDocs(ref);
+
+    const numeroPerfiles = snapshot.size;
+
+    console.log("Número de perfiles registrados:", numeroPerfiles);
+    console.log("Límite máximo de perfiles:", MAX_PERFILES);
+
+    if (numeroPerfiles >= MAX_PERFILES) {
+        alert(`Has alcanzado el límite de ${MAX_PERFILES} perfiles. No puedes agregar más.`);
+        window.location.href = "persona_dashboard.html";
+    }
+});
+
 
 function calcularIMC(peso, alturaCm) {
     const pesoNum = Number(peso);

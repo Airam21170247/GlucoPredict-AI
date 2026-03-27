@@ -1,8 +1,15 @@
 ﻿import { auth, db } from "./configurationFirebase.js";
 import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { deletePerfilCompleto } from "./crud_helpers.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+import { MAX_PERFILES } from "./reestrinccionesLicencia.js";
 
 const lista = document.getElementById("listaPerfiles");
+
+const btnAgregarPerfil = document.getElementById("btnAgregarPerfil");
 
 function crearItemPerfil(user, perfilId, data) {
     const li = document.createElement("li");
@@ -54,6 +61,40 @@ auth.onAuthStateChanged(async (user) => {
     const ref = collection(db, "users", user.uid, "perfiles");
     const snapshot = await getDocs(ref);
 
+    const numeroPerfiles = snapshot.size;
+    console.log(`Número de perfiles: ${numeroPerfiles}`);
+
+    if (numeroPerfiles >= MAX_PERFILES) {
+        // Reestringir acceso a características de usuario no PAGA
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
+        
+        if (userSnap.exists()) {
+            window.user = userSnap.data();
+            console.log("Usuario actual:", window.user);
+            console.log("Tipo de usuario:", window.user.tipo);
+            
+            if (window.user.tipo !== "PAGA") {
+                btnAgregarPerfil.title = "Solo disponible maximo 3 perfiles para usuarios no PAGA. Actualiza a PAGA para agregar más.";
+                btnAgregarPerfil.style.backgroundColor = "#ccc";
+                btnAgregarPerfil.style.cursor = "not-allowed";
+                btnAgregarPerfil.onclick = () => {
+                    const respuesta = confirm("Solo disponible maximo 3 perfiles para usuarios no PAGA. ¿Deseas ir a la página de pago?");
+                    if (respuesta) {
+                        // El usuario presionó "Aceptar"
+                        window.location.href = "../../FrontEnd/HTML/paga.html?where=perfiles";
+                    } else {
+                        // El usuario presionó "Cancelar"
+                        console.log("El usuario decidió no ir a la página de pago");
+                    }
+                };
+                
+            }
+        } else {
+            console.log("No existe documento para este usuario en Firestore");
+        }
+    }
+
     lista.innerHTML = "";
 
     if (snapshot.empty) {
@@ -65,3 +106,8 @@ auth.onAuthStateChanged(async (user) => {
         lista.appendChild(crearItemPerfil(user, docSnap.id, docSnap.data()));
     });
 });
+
+
+btnAgregarPerfil.onclick = () => {
+    window.location.href = "agregar_perfil.html";
+};

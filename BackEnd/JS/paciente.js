@@ -142,6 +142,34 @@ onAuthStateChanged(auth, async (user) => {
         return;
     }
 
+    // Reestringir acceso a características de usuario no PAGA
+    const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
+        
+        if (userSnap.exists()) {
+            window.user = userSnap.data();
+            console.log("Usuario actual:", window.user);
+            console.log("Tipo de usuario:", window.user.tipo);
+            
+            if (window.user.tipo !== "PAGA") {
+                btnSimular.title = "Solo disponible para usuarios PAGA";
+                btnSimular.style.backgroundColor = "#ccc";
+                btnSimular.style.cursor = "not-allowed";
+                btnSimular.onclick = () => {
+                    const respuesta = confirm("Simulador solo disponible para usuarios PAGA. ¿Deseas ir a la página de pago?");
+                    if (respuesta) {
+                        // El usuario presionó "Aceptar"
+                        window.location.href = "../../FrontEnd/HTML/paga.html?where=paciente";
+                    } else {
+                        // El usuario presionó "Cancelar"
+                        console.log("El usuario decidió no ir a la página de pago");
+                    }
+                };
+            }
+        } else {
+            console.log("No existe documento para este usuario en Firestore");
+        }
+
     try {
         const pacienteRef = doc(db, "users", user.uid, "clinicas", clinicaId, "pacientes", pacienteId);
         const pacienteSnap = await getDoc(pacienteRef);
